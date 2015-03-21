@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>001b</title>
+    <script src="http://localhost:8001/js/lib/traceur/traceur.js"></script>
+    <script src="http://localhost:8001/js/lib/traceur/bootstrap.js"></script>
+  </head>
+  <body>
+    <script type="module">
+
+        function varFunc() {
+            var previous = 0;
+            var current = 1;
+            var i;
+            var temp;
+
+            for (i=0; i<3; i+=1) {
+                temp = previous;
+                previous = current;
+                current = temp + current;
+                console.log(i, temp, previous, current);
+            }
+        }
+        varFunc();
+
+        console.log('-------------------');
+
+        function letFunc() {
+            let previous = 0;
+            let current = 1;
+
+            for (let i=0; i<3; i+=1) {
+                let temp = previous;
+
+                previous = current;
+                current = temp + current;
+                console.log(i, temp, previous, current);
+            }
+        }
+        letFunc();
+
+
+        console.log('-------------------');
+
+        function Func() {
+            var previous = 0;
+            var current = 1;
+
+            for (var i=0; i<3; i+=1) {
+                var temp = previous;
+
+                previous = current;
+                current = temp + current;
+                console.log(i, temp, previous, current);
+            }
+        }
+        Func();
+        console.log('i', 'temp', 'previous', 'current');
+    </script>
+    <h1 id="message"></h1>
+  </body>
+</html>

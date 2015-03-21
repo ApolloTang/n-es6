@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>001-let</title>
+    <script src="http://localhost:8001/js/lib/traceur/traceur.js"></script>
+    <script src="http://localhost:8001/js/lib/traceur/bootstrap.js"></script>
+</head>
+
+<body>
+    <script type="module">
+    //ref: http://stackoverflow.com/questions/762011/javascript-let-keyword-vs-var-keyword
+
+    // Here is the difference. let is only visible in the for() loop
+    // and var is visible to the whole function.
+
+    function allyIlliterate() {
+        //tuce is *not* visible out here
+
+        for( let tuce = 0; tuce < 5; tuce++ ) {
+            //tuce is only visible in here (and in the for() parentheses)
+        };
+
+        //tuce is *not* visible out here
+    };
+
+    function byE40() {
+        //nish *is* visible out here
+
+        for( var nish = 0; nish < 5; nish++ ) {
+            //nish is visible to the whole function
+        };
+
+        //nish *is* visible out here
+    };
+
+    </script>
+    <h1 id="message"></h1>
+</body>
+
+</html>

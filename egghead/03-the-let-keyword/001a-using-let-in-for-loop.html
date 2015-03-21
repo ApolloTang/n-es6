@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>001</title>
+    <script src="http://localhost:8001/js/lib/traceur/traceur.js"></script>
+    <script src="http://localhost:8001/js/lib/traceur/bootstrap.js"></script>
+  </head>
+  <body>
+    <script type="module">
+
+        ( function(){
+
+            // All 10 functions that pushed into the array
+            // are in the same scope. When i is incresed
+            // in the for-loop, every i in all ten
+            // functions are incresed. And since the
+            // final value of i is 10, console.log print
+            // ten 10s
+
+            var fs = [];
+            for (var i = 0; i < 10; i++) {
+                fs.push( function(){ console.log(i);} );
+            }
+            fs.forEach(function(f){f();});
+
+        })();
+
+        console.log('- - - - - - - - ');
+
+        ( function(){
+
+            // With let variable declaration, each iteration
+            // of for loop is a new scope -- all 10 functions
+            // that pushed into the array exist in their own scope;
+            // each has their own value of i as the function is
+            // created.
+
+            var fs = [];
+            for (let i = 0; i < 10; i++) {
+                fs.push( function(){ console.log(i);} );
+            }
+            fs.forEach(function(f){f();});
+
+        })();
+
+    </script>
+    <h1 id="message"></h1>
+  </body>
+</html>
