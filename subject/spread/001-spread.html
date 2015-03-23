@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>001-let</title>
+    <script src="http://localhost:8001/js/lib/traceur/traceur.js"></script>
+    <script src="http://localhost:8001/js/lib/traceur/bootstrap.js"></script>
+</head>
+
+<body>
+    <script type="module">
+        function f(u, v, w, x, y, z) {
+            console.log(arguments);
+            console.log(u,v,w,x,y,z);
+        }
+        var two_three = [2, 3];
+        f(1, ...two_three, 4, ...[5,6]);
+    </script>
+</body>
+
+</html>
