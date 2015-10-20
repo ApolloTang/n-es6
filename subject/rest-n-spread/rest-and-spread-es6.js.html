@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>rest and spread</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="http://localhost:8001/css/lib/normalize&#45;2.1.2.css"> -->
+    <style media="screen" type="text/css">
+    </style>
+</head>
+
+<body>
+    <script src="http://localhost:8001/js/lib/babel-core--browser.js"></script>
+    <script type="text/babel">
+        // From:
+        // http://ariya.ofilabs.com/2013/03/es6-and-rest-parameter.html
+        // http://ariya.ofilabs.com/2013/03/es6-and-spread-operator.html
+
+        const store = {
+            aisle: {
+                fruit: [],
+                dairy: [],
+                pastries: [],
+                vege: []
+
+            }
+        };
+
+        store.add = function(category) {
+            const items = [].slice.call(arguments, 1);
+            items.forEach(function(item) {
+                store.aisle[category].push(item);
+            });
+        };
+
+        store.add('fruit', 'apple', 'orange');
+
+
+        var dairyBox = ['milk', 'cheese', 'yoghurt'];
+        store.add.apply(null, ['dairy'].concat(dairyBox));
+
+        var pastriesBox = ['donuts', 'croissants', 'yoghurt'];
+        store.add('pastries', ...pastriesBox);
+
+
+
+        store.add_ES6 = function(category, ...items) {
+            items.forEach(function(item) {
+                store.aisle[category].push(item);
+            });
+        };
+
+        store.add_ES6('vege', 'carliflower', 'zuchinni');
+
+        Object.keys(store.aisle).forEach(function(item) {
+            console.log(item, store.aisle[item]);
+        });
+    </script>
+</body>
+
+</html>
