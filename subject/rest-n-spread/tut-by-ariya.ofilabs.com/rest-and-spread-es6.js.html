@@ -43,11 +43,11 @@
         store.add.apply(null, ['dairy'].concat(dairyBox));
 
         var pastriesBox = ['donuts', 'croissants', 'yoghurt'];
-        store.add('pastries', ...pastriesBox);
+        store.add('pastries', ...pastriesBox);          //<--- using spread operator at actual parameter
 
 
 
-        store.add_ES6 = function(category, ...items) {
+        store.add_ES6 = function(category, ...items) {  //<--- using rest parameter at formal paramter
             items.forEach(function(item) {
                 store.aisle[category].push(item);
             });

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>object spread</title>
+</head>
+<body>
+
+<script src="http://localhost:8001/js/lib/lodash-v3.10.1.js"></script>
+<script src="http://localhost:8001/js/lib/babel-transform-in-browser@6.4.6.min.js"></script>
+<script type="text/es2015">
+const A = {a:'a', c: 'c'};
+console.log('A: ', A)
+
+const B = {b:'b'};
+console.log('B: ', B)
+
+console.log('\n------------------ Shallow Clone');
+const ShallowClone_A = {...A};
+console.log('ShallowClone_A: ', ShallowClone_A);             // {a: "a", c: "c"}
+console.log('ShallowClone_A === A: ', ShallowClone_A === A); // false
+
+console.log('\n------------------ Merge');
+const Merge_A_B = {...A, ...B};
+console.log('Merge_A_B: ', Merge_A_B);                       // {a: "a", c: "c", b: "b"}
+
+console.log('\n------------------ Extend');
+const extend_CloneA_with_x = {...A, x:'x'};
+console.log('extend_CloneA_with_x', extend_CloneA_with_x);   // {a: "a", c: "c", x: "x"}
+console.log('not mutate A: ', A)                             // {a: "a", c: "c"}
+
+// const extend_CloneA_with_x2 = {...A, {x:'x'}};
+//                                      ^--- Syntax error
+
+const extend_CloneA_with_x2 = {...A, ...{x:'x'}};
+console.log('extend_CloneA_with_x2', extend_CloneA_with_x2);  // {a: "a", c: "c", x: "x"}
+
+const x = 'x';
+const extend_CloneA_with_x3 = {...A, x};
+console.log('extend_CloneA_with_x3', extend_CloneA_with_x3); // {a: "a", c: "c", x: "x"}
+
+console.log('\n------------------ Over write properties');
+const overwrite_CloneA_props1 = {...A, c:'x'};
+console.log('overwrite_CloneA_props1', overwrite_CloneA_props1);   // {a: "a", c: "c", x: "x"}
+
+const overwrite_CloneA_props2 = {...A, ...{c:'x'} };
+console.log('overwrite_CloneA_props2', overwrite_CloneA_props2);   // {a: "a", c: "c", x: "x"}
+
+const c = 'x';
+const overwrite_CloneA_props3 = {...A, c };
+console.log('overwrite_CloneA_props3', overwrite_CloneA_props3);   // {a: "a", c: "c", x: "x"}
+console.log('not mutate A: ', A)                                   // {a: "a", c: "c"}
+
+
+console.log('\n------------------ ignoreing null and undifine');
+const null_n_undefined = {...A, ...null, ...undefined, ...{c:null} }
+console.log('null_n_undefined: ', null_n_undefined) // {a: "a", c: null}
+
+
+console.log('\n------------------ IFI');
+const f = (a, b)=>({result: a+b });
+const IFI1 = {...A, ...(f)('a','b') }
+console.log('IFI1: ', IFI1) // {a: "a", c: "c", result: "ab"}
+
+const IFI2 = {...A, ...((a, b)=>({result: a+b }))('x','y') }
+console.log('IFI2: ', IFI2) // {a: "a", c: "c", result: "xy"}
+
+const IFI3 = {...A, ...((a, b)=>({c: a+b }))('x','y') }
+console.log('IFI3: ', IFI3) // {a: "a", c: "xy"}
+</script>
+</body>
+</html>
