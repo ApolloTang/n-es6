@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Getter, Setter</title>
+</head>
+<body>
+<script src="http://localhost:8001/js/lib/lodash-v3.10.1.js"></script>
+
+<script>
+    // ES5
+    var  E  = function(z) {
+        'use strict'
+
+        var _z = z;
+        var _o = {
+            get x() {
+                return _z;
+            },
+            set x(v) {
+                _z = _z + ' ' + v;
+            }
+        }
+        return  _o;
+    };
+
+    const e = new E('initialValue');
+    e.x = 'addedValue';
+    console.log('es5: ', e.x);  // 'initialValue addedValue'
+
+    const e2 = new E('initialValue2');
+    e2.x = 'addedValue2';
+    console.log('es5: ', e2.x);  // 'initialValue addedValue'
+
+    // Just to make sure e2 is a new instance
+    console.log('es5: ', e.x);  // 'initialValue2 addedValue2'
+</script>
+
+
+<script src="http://localhost:8001/js/lib/babel-transform-in-browser@6.4.6.min.js"></script>
+<script type="text/es2015">
+    // ES6
+    class C {
+        constructor(z) {
+            this._z = z;
+        }
+        get x() {
+            return this._z;
+        }
+        set x(v) {
+            this._z = this._z + ' ' + v;
+        }
+    }
+    const c = new C('initialValue');
+    c.x = 'addedValue';
+    console.log('es6: ', c.x);  // 'initialValue addedValue'
+</script>
+
+
+</body>
+</html>
