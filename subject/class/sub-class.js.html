@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SubClass</title>
+</head>
+<body>
+
+<script src="http://localhost:8001/js/lib/lodash-v3.10.1.js"></script>
+
+<script> </script>
+
+
+<script src="http://localhost:8001/js/lib/babel-transform-in-browser@6.4.6.min.js"></script>
+<script type="text/es2015">
+    class Base {
+        constructor(x) { this.x = x; }
+        getProps() { return `{ x:${this.x} }`; }
+    }
+    class Derive extends Base {
+        constructor(x, c) {
+            super(x);
+            this.c = c;
+        }
+        getProps() { return `{ x:${this.x}, c:${this.c} }`; }
+        getBaseProps() { return super.getProps(); }
+
+    }
+
+
+    const b = new Base('x');
+    const s = new Derive('x', 'c');
+
+    console.log( b.getProps() ) // {x:x}
+    console.log( s.getProps() ) // {x:x, c:c}
+    console.log( s.getBaseProps() ) // {x:x, c:c}
+
+    console.log( b instanceof Base ) // true
+    console.log( s instanceof Base ) // true
+    console.log( s instanceof Derive )  // true
+
+    console.log( b instanceof Derive )  // false
+</script>
+
+
+</body>
+</html>
